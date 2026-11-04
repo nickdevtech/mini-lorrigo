@@ -93,9 +93,3 @@ _(Frontend runs on `http://localhost:5173`)_
 | `GET`  | `/api/shipments/:awb`        | Track shipment details & history log               |
 | `POST` | `/api/shipments/:awb/status` | Update status (enforces state machine & RTO rules) |
 
-git add frontend/src/components/ShipmentTracker.jsx
-git commit -m "feat(ui): add ShipmentTracker component with lifecycle progress bar and simulator"
-
-git add frontend/src/App.jsx
-git commit -m "feat(ui): integrate RateCalculator and ShipmentTracker in main dashboard layout"
-git push
