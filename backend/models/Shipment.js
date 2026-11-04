@@ -1,20 +1,16 @@
-import { Schema, model } from 'mongoose';
+import mongoose from 'mongoose';
 
-const statusHistorySchema = new Schema({
+const statusHistorySchema = new mongoose.Schema({
   status: { type: String, required: true },
   timestamp: { type: Date, default: Date.now },
   remarks: { type: String }
 });
 
-const shipmentSchema = new Schema({
+const shipmentSchema = new mongoose.Schema({
   awb: { type: String, required: true, unique: true },
   pickupPincode: { type: String, required: true },
   deliveryPincode: { type: String, required: true },
-  dimensions: {
-    length: Number,
-    breadth: Number,
-    height: Number
-  },
+  dimensions: { length: Number, breadth: Number, height: Number },
   actualWeight: Number,
   volumetricWeight: Number,
   billedWeight: Number,
@@ -25,19 +21,10 @@ const shipmentSchema = new Schema({
   currentStatus: {
     type: String,
     default: 'CREATED',
-    enum: [
-      'CREATED',
-      'PICKED_UP',
-      'IN_TRANSIT',
-      'OUT_FOR_DELIVERY',
-      'DELIVERED',
-      'NDR',
-      'RTO_INITIATED',
-      'RTO_DELIVERED'
-    ]
+    enum: ['CREATED', 'PICKED_UP', 'IN_TRANSIT', 'OUT_FOR_DELIVERY', 'DELIVERED', 'NDR', 'RTO_INITIATED', 'RTO_DELIVERED']
   },
   ndrAttempts: { type: Number, default: 0 },
   history: [statusHistorySchema]
 }, { timestamps: true });
 
-export default model('Shipment', shipmentSchema);
+export default mongoose.model('Shipment', shipmentSchema);
