@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import RateCalculator from "./components/RateCalculator";
 import ShipmentTracker from "./components/ShipmentTracker";
 
-const API_BASE = '/api';
+const API_BASE = window.location.hostname === 'localhost' 
+  ? 'http://localhost:5000/api' 
+  : '/api';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState("calculator");

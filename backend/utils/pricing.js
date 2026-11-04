@@ -28,7 +28,7 @@ const COURIERS = [
   },
 ];
 
-// Dhyan dein: Yahan 'export' lagana zaroori hai
+
 export const ALLOWED_TRANSITIONS = {
   CREATED: ["PICKED_UP"],
   PICKED_UP: ["IN_TRANSIT"],
@@ -40,7 +40,7 @@ export const ALLOWED_TRANSITIONS = {
   RTO_DELIVERED: [],
 };
 
-// Yahan bhi 'export' function ke aage hona chahiye
+
 export function calculateShippingDetails(
   pickupPincode,
   deliveryPincode,

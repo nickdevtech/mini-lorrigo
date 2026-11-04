@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 
-const API_BASE = '/api';
+const API_BASE =
+  window.location.hostname === "localhost"
+    ? "http://localhost:5000/api"
+    : "/api";
 
 const ALLOWED_NEXT = {
   CREATED: ["PICKED_UP"],
@@ -29,12 +32,10 @@ export default function ShipmentTracker({ initialAwb }) {
   const [errorMsg, setErrorMsg] = useState("");
   const [updating, setUpdating] = useState(false);
 
-  // Component load hote hi saari purani shipments fetch karega (bilkul purane code ki tarah)
   useEffect(() => {
     fetchShipments();
   }, []);
 
-  // Agar RateCalculator se naya AWB aaya ho toh use track karega
   useEffect(() => {
     if (initialAwb) {
       setSearchAwb(initialAwb);
@@ -66,7 +67,6 @@ export default function ShipmentTracker({ initialAwb }) {
 
     setErrorMsg("");
 
-    // Pehle local list mein check karein taaki turant bina delay ke dikhe
     const foundLocal = allShipments.find(
       (s) => s.awb?.toUpperCase() === targetAwb,
     );
@@ -75,7 +75,6 @@ export default function ShipmentTracker({ initialAwb }) {
       setSearchAwb(foundLocal.awb);
     }
 
-    // Backend se fresh data bhi layein
     try {
       const res = await fetch(`${API_BASE}/shipments/${targetAwb}`);
       const data = await res.json();

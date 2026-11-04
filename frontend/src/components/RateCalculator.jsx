@@ -1,5 +1,8 @@
 import React, { useState } from "react";
-const API_BASE = "/api";
+
+const API_BASE = window.location.hostname === 'localhost' 
+  ? 'http://localhost:5000/api' 
+  : '/api';
 
 export default function RateCalculator({ onBookingSuccess }) {
   const [form, setForm] = useState({
