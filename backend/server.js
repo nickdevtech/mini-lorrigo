@@ -3,6 +3,7 @@ import express, { json } from "express";
 import { connectDB } from "./config/db.js";
 import cors from "cors";
 dotenv.config();
+import shipmentRoutes from './routes/shipmentRoutes.js';
 
 const app = express();
 app.use(cors());
@@ -10,6 +11,9 @@ app.use(json());
 
 // Connect to Database
 connectDB();
+
+// routes
+app.use('/api', shipmentRoutes);
 
 app.get("/", (req, res) => {
   res.send("Mini Lorrigo API is running");
